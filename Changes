@@ -1,0 +1,15 @@
+Revision history for Finance-InteractiveBrokers-API
+------------------------------------------------------------
+Legend:
+BUG:    An actual found or reported bug fix.
+FIX:    Change toward correct behavior, but unreported.
+DOC:    Changes to documentation.
+NEW:    New, previously non-existent feature.
+------------------------------------------------------------
+
+0.01_01  2011-01-24     (developer release)
+         Main module should be complete
+         Covers InteractiveBrokers API v9.64
+         Prepped for releasing to CPAN for cpantesters feedback
+
+# END
