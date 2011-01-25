@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.01_01';
+    $VERSION   = '0.01_02';
 }
 
 *TRUE     = \1;
@@ -334,6 +334,7 @@ Finance::InteractiveBrokers::API - Convenience functions for working with the In
     my $ibapi = Finance::InteractiveBrokers::API->new(
         version => '9.64',          # API version
     );
+
     my @api_versions       = $ibapi->api_versions();
     my @methods            = $ibapi->methods();
     my @events             = $ibapi->events();
@@ -353,7 +354,7 @@ L<Finance::InteractiveBrokers::SWIG> and L<POE::Component::Client::InteractiveBr
 to reduce maintenance, by isolating the API description for each revision
 into one single location.
 
-This module should be updated each time new versions of the IB API are
+This module will ideally be updated each time new versions of the IB API are
 released.  If the author gets hit by a bus, there is enough documentation
 contained herein to make the changes yourself.
 
@@ -371,13 +372,9 @@ B<ARGUMENTS:>
 
 B<version =E<gt> $scalar> [ Default: I<9.64> ]
 
-=over 4
-
 The API version you wish to refer to.
 
-=back
-
-B<RETURNS:> blessed I<$object>, or I<undef> on failure.
+B<RETURNS:> blessed C<$object>, or C<undef> on failure.
 
 =head2 initialize()
 
@@ -395,15 +392,17 @@ B<RETURNS:> %HASH of any leftover arguments.
 
     my @api_versions = $ibapi->api_versions();
 
-Get a list of all API versions that can be described by this module.  Also works as a class method, and can be optionally imported (not exported by default) via:
-
-    use Finance::InteractiveBrokers::API qw( api_versions );
+Get a list of all API versions that can be described by this module.
 
 B<ARGUMENTS:>
 
 None.
 
 B<RETURNS:> @ARRAY of all API versions enumerated by this module.
+
+NOTE: B<api_versions()> lso works as a class method, and can be I<optionally> imported via:
+
+    use Finance::InteractiveBrokers::API qw( api_versions );
 
 =head2 versions()
 
@@ -415,9 +414,7 @@ An alias for L</api_versions()>.
 
 Get a list of methods in the constructor-specified version of the API.
 
-B<ARGUMENTS:>
-
-None.
+B<ARGUMENTS:> None.
 
 B<RETURNS:> @ARRAY of all API method names in this version.
 
@@ -427,9 +424,7 @@ B<RETURNS:> @ARRAY of all API method names in this version.
 
 Get a list of events in the constructor-specified version of the API.
 
-B<ARGUMENTS:>
-
-None.
+B<ARGUMENTS:> None.
 
 B<RETURNS:> @ARRAY of all API events in this version.
 
@@ -439,9 +434,7 @@ B<RETURNS:> @ARRAY of all API events in this version.
 
 Get a list of both methods and events in the constructor-specified version of the API.
 
-B<ARGUMENTS:>
-
-None.
+B<ARGUMENTS:> None.
 
 B<RETURNS:> @ARRAY of all API methods and events in this version.
 
@@ -455,11 +448,7 @@ B<ARGUMENTS:>
 
 B<$method_name>
 
-=over 4
-
 The method name you wish to query.
-
-=back
 
 B<RETURNS:> TRUE or FALSE (well, 1 or 0).
 
@@ -473,11 +462,7 @@ B<ARGUMENTS:>
 
 B<$event_name>
 
-=over 4
-
 The event name you wish to query.
-
-=back
 
 B<RETURNS:> TRUE or FALSE (well, 1 or 0).
 
@@ -491,23 +476,18 @@ B<ARGUMENTS:>
 
 B<$name>
 
-=over 4
-
 The method or event name you wish to query.
-
-=back
 
 B<RETURNS:> TRUE or FALSE (well, 1 or 0).
 
 =head2 api_version()
 
-    my $api_version        = $ibapi->api_version();     # will return 9.64
+    my $ibapi       = Finance::InteractiveBrokers::API->new( version => '9.64' );
+    my $api_version = $ibapi->api_version();     # will return 9.64
 
 Get the API version described by this object instance.
 
-B<ARGUMENTS:>
-
-None.
+B<ARGUMENTS:> None.
 
 B<RETURNS:> The API version as a string (e.g. '9.64').
 
@@ -516,6 +496,8 @@ B<RETURNS:> The API version as a string (e.g. '9.64').
 An alias for L</api_version()>.
 
 =head1 SEE ALSO
+
+L<Alien::InteractiveBrokers>
 
 L<POE::Component::Client::InteractiveBrokers>
 
@@ -539,8 +521,8 @@ Jason McManus, C<< <infidel at cpan.org> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to
-C<bug-poe-component-client-interactivebrokers at rt.cpan.org>, or through
-the web interface atL<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Finance-InteractiveBrokers-API>.  The authors will be notified, and then you'll
+C<bug-finance-interactivebrokers-api at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Finance-InteractiveBrokers-API>.  The authors will be notified, and then you'll
 automatically be notified of progress on your bug as changes are made.
 
 =head1 SUPPORT

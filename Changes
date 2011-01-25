@@ -3,9 +3,12 @@ Revision history for Finance-InteractiveBrokers-API
 Legend:
 BUG:    An actual found or reported bug fix.
 FIX:    Change toward correct behavior, but unreported.
-DOC:    Changes to documentation.
 NEW:    New, previously non-existent feature.
+DOC:    Changes to documentation.
 ------------------------------------------------------------
+
+0.01_02  2011-01-25     (developer release)
+         DOC: Fixing documentation bugs seen on CPAN from 0.01_01
 
 0.01_01  2011-01-24     (developer release)
          Main module should be complete
