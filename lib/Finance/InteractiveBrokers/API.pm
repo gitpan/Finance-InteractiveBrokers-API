@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.01_02';
+    $VERSION   = '0.02';
 }
 
 *TRUE     = \1;
@@ -382,9 +382,9 @@ B<RETURNS:> blessed C<$object>, or C<undef> on failure.
 
 Initialize the object.  If you are subclassing, override this, not L</new()>.
 
-B<ARGUMENTS:> %HASH of arguments passed into L</new()>
+B<ARGUMENTS:> C<%HASH> of arguments passed into L</new()>
 
-B<RETURNS:> %HASH of any leftover arguments.
+B<RETURNS:> C<%HASH> of any leftover arguments.
 
 =head1 METHODS
 
@@ -394,13 +394,11 @@ B<RETURNS:> %HASH of any leftover arguments.
 
 Get a list of all API versions that can be described by this module.
 
-B<ARGUMENTS:>
+B<ARGUMENTS:> None.
 
-None.
+B<RETURNS:> C<@ARRAY> of API versions.
 
-B<RETURNS:> @ARRAY of all API versions enumerated by this module.
-
-NOTE: B<api_versions()> lso works as a class method, and can be I<optionally> imported via:
+NOTE: C<api_versions()> also works as a class method, and can be I<optionally> imported via:
 
     use Finance::InteractiveBrokers::API qw( api_versions );
 
@@ -416,7 +414,7 @@ Get a list of methods in the constructor-specified version of the API.
 
 B<ARGUMENTS:> None.
 
-B<RETURNS:> @ARRAY of all API method names in this version.
+B<RETURNS:> C<@ARRAY> of all API method names in this version.
 
 =head2 events()
 
@@ -426,7 +424,7 @@ Get a list of events in the constructor-specified version of the API.
 
 B<ARGUMENTS:> None.
 
-B<RETURNS:> @ARRAY of all API events in this version.
+B<RETURNS:> C<@ARRAY> of all API events in this version.
 
 =head2 everything()
 
@@ -436,7 +434,7 @@ Get a list of both methods and events in the constructor-specified version of th
 
 B<ARGUMENTS:> None.
 
-B<RETURNS:> @ARRAY of all API methods and events in this version.
+B<RETURNS:> C<@ARRAY> of all API methods and events in this version.
 
 =head2 is_method()
 
@@ -489,7 +487,7 @@ Get the API version described by this object instance.
 
 B<ARGUMENTS:> None.
 
-B<RETURNS:> The API version as a string (e.g. '9.64').
+B<RETURNS:> The API version as a string (e.g. C<'9.64'>).
 
 =head2 version()
 

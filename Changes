@@ -7,6 +7,12 @@ NEW:    New, previously non-existent feature.
 DOC:    Changes to documentation.
 ------------------------------------------------------------
 
+0.02     2011-01-25
+         First production CPAN release
+         Covers InteractiveBrokers API v9.64
+         DOC: Minor documentation tweaks
+         FIX: Versioning scheme will change from here on.
+
 0.01_02  2011-01-25     (developer release)
          DOC: Fixing documentation bugs seen on CPAN from 0.01_01
 
