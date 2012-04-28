@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.02';
+    $VERSION   = '0.02_01';
 }
 
 *TRUE     = \1;
@@ -40,127 +40,129 @@ my $methods = {};
 my $events = {};
 my $methods_arr = {
     '9.64' => [
-    # Our add-ons
-    qw(
-        processMessages
-    ),
-    # Official API
-    # XXX: API Docs and source code differ (I use the source code names):
-    #           Docs                C++ headers
-    #           -------------------------------------------
-    #           reqIDs()            reqIds()
-    #           setLogLevel()       setServerLogLevel()
-    qw(
-        eConnect
-        eDisconnect
-        isConnected
-        reqCurrentTime
-        serverVersion
-        setServerLogLevel
-        checkMessages
-        TwsConnectionTime
+        # Our add-ons
+        qw(
+            processMessages
+        ),
+        # Official API
+        # XXX: API Docs and source code differ (I use the source code names):
+        #           Docs                C++ headers
+        #           -------------------------------------------
+        #           reqIDs()            reqIds()
+        #           setLogLevel()       setServerLogLevel()
+        qw(
+            eConnect
+            eDisconnect
+            isConnected
+            reqCurrentTime
+            serverVersion
+            setServerLogLevel
+            checkMessages
+            TwsConnectionTime
 
-        reqMktData
-        cancelMktData
-        calculateImpliedVolatility
-        cancelCalculateImpliedVolatility
-        calculateOptionPrice
-        cancelCalculateOptionPrice
+            reqMktData
+            cancelMktData
+            calculateImpliedVolatility
+            cancelCalculateImpliedVolatility
+            calculateOptionPrice
+            cancelCalculateOptionPrice
 
-        placeOrder
-        cancelOrder
-        reqOpenOrders
-        reqAllOpenOrders
-        reqAutoOpenOrders
-        reqIds
-        exerciseOptions
+            placeOrder
+            cancelOrder
+            reqOpenOrders
+            reqAllOpenOrders
+            reqAutoOpenOrders
+            reqIds
+            exerciseOptions
 
-        reqAccountUpdates
+            reqAccountUpdates
 
-        reqExecutions
+            reqExecutions
 
-        reqContractDetails
+            reqContractDetails
 
-        reqMktDepth
-        cancelMktDepth
+            reqMktDepth
+            cancelMktDepth
 
-        reqNewsBulletins
-        cancelNewsBulletins
+            reqNewsBulletins
+            cancelNewsBulletins
 
-        reqManagedAccts
-        requestFA
-        replaceFA
+            reqManagedAccts
+            requestFA
+            replaceFA
 
-        reqHistoricalData
-        cancelHistoricalData
+            reqHistoricalData
+            cancelHistoricalData
 
-        reqScannerParameters
-        reqScannerSubscription
-        cancelScannerSubscription
+            reqScannerParameters
+            reqScannerSubscription
+            cancelScannerSubscription
 
-        reqRealTimeBars
-        cancelRealTimeBars
+            reqRealTimeBars
+            cancelRealTimeBars
 
-        reqFundamentalData
-        cancelFundamentalData
-    ) ],
+            reqFundamentalData
+            cancelFundamentalData
+        ),
+    ],
 };
 my $events_arr = {
     '9.64' => [
-    qw(
-        winError
-        error
-        connectionClosed
-        currentTime
+        qw(
+            winError
+            error
+            connectionClosed
+            currentTime
 
-        tickPrice
-        tickSize
-        tickOptionComputation
-        tickGeneric
-        tickString
-        tickEFP
-        tickSnapshotEnd
+            tickPrice
+            tickSize
+            tickOptionComputation
+            tickGeneric
+            tickString
+            tickEFP
+            tickSnapshotEnd
 
-        orderStatus
-        openOrder
-        nextValidId
+            orderStatus
+            openOrder
+            nextValidId
 
-        updateAccountValue
-        updatePortfolio
-        updateAccountTime
+            updateAccountValue
+            updatePortfolio
+            updateAccountTime
 
-        updateNewsBulletin
+            updateNewsBulletin
 
-        contractDetails
-        contractDetailsEnd
-        bondContractDetails
+            contractDetails
+            contractDetailsEnd
+            bondContractDetails
 
-        execDetails
-        execDetailsEnd
+            execDetails
+            execDetailsEnd
 
-        updateMktDepth
-        updateMktDepthL2
+            updateMktDepth
+            updateMktDepthL2
 
-        managedAccounts
-        receiveFA
+            managedAccounts
+            receiveFA
 
-        historicalData
+            historicalData
 
-        scannerParameters
-        scannerData
-        scannerDataEnd
+            scannerParameters
+            scannerData
+            scannerDataEnd
 
-        realtimeBar
+            realtimeBar
 
-        fundamentalData
+            fundamentalData
 
-        deltaNeutralValidation
-    ),
-    # These are in the headers, but apparently not documented
-    qw(
-        openOrderEnd
-        accountDownloadEnd
-    ) ],
+            deltaNeutralValidation
+        ),
+        # These are in the headers, but apparently not documented
+        qw(
+            openOrderEnd
+            accountDownloadEnd
+        )
+    ],
 };
 
 # Example of adding just a couple of methods for a new version:
@@ -172,11 +174,31 @@ my $events_arr = {
 #    ),
 # };
 
+######################
+# 9.67 methods
+$methods_arr->{'9.67'} = [
+    @{ $methods_arr->{'9.64'} },
+    qw(
+        reqMarketDataType
+    ),
+];
+
+# 9.67 events
+$events_arr->{'9.67'} = [
+    grep { ! /deltaNeutralValidation/ } @{ $events_arr->{'9.64'} },
+    qw(
+        marketDataType
+        commissionReport
+    ),
+];
+
 # Cram them into a hash for O(1) lookup time
-for my $ver ( keys( %$methods_arr ) ) {
+for my $ver ( keys( %$methods_arr ) )
+{
     $methods->{$ver} = { map { $_ => 1 } @{ $methods_arr->{$ver} } };
 }
-for my $ver ( keys( %$events_arr ) ) {
+for my $ver ( keys( %$events_arr ) )
+{
     $events->{$ver}  = { map { $_ => 1 } @{ $events_arr->{$ver} } };
 }
 
@@ -277,6 +299,8 @@ sub is_method
 {
     my( $self, $name ) = ( shift, shift );
 
+    return $FALSE unless( defined( $name ) );
+
     return( exists( $methods->{$self->api_version}->{$name} )
               ? $TRUE
               : $FALSE );
@@ -286,6 +310,8 @@ sub is_event
 {
     my( $self, $name ) = ( shift, shift );
 
+    return $FALSE unless( defined( $name ) );
+
     return( exists( $events->{$self->api_version}->{$name} )
               ? $TRUE
               : $FALSE );
@@ -294,6 +320,8 @@ sub is_event
 sub in_api
 {
     my( $self, $name ) = ( shift, shift );
+
+    return $FALSE unless( defined( $name ) );
 
     return( ( $self->is_method( $name ) or $self->is_event( $name ) )
                 ? $TRUE
@@ -316,7 +344,7 @@ sub api_version
 ###
 
 no warnings 'once';
-*version = *api_version;
+*version  = *api_version;
 *versions = *api_versions;
 
 1;
@@ -370,7 +398,7 @@ Create a new Finance::InteractiveBrokers object.
 
 B<ARGUMENTS:>
 
-B<version =E<gt> $scalar> [ Default: I<9.64> ]
+B<version =E<gt> $scalar> [ Default: C<9.64> ]
 
 The API version you wish to refer to.
 
