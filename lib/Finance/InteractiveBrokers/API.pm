@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.02_02';
+    $VERSION   = '0.02_03';
 }
 
 *TRUE     = \1;
@@ -111,6 +111,10 @@ $methods_arr->{'9.66'} = [
     @{ $methods_arr->{'9.65'} },
     qw(
         reqMarketDataType
+    ),
+    # UNDOCUMENTED
+    qw(
+        reqGlobalCancel
     ),
 ];
 $methods_arr->{'9.67'} = $methods_arr->{'9.66'};

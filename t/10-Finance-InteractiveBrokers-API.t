@@ -16,7 +16,7 @@ use warnings;
 
 use vars qw( $TRUE $FALSE $VERSION );
 BEGIN {
-    $VERSION = '0.02_02';
+    $VERSION = '0.02_03';
 }
 
 *TRUE      = \1;
@@ -169,6 +169,7 @@ BEGIN {
         @{ $API->{'9.65'} },
         qw(
             reqMarketDataType
+            reqGlobalCancel
         ),
     ];
     $API->{'9.67'} = $API->{'9.66'};
