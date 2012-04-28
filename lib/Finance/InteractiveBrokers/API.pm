@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.02_01';
+    $VERSION   = '0.02_02';
 }
 
 *TRUE     = \1;
@@ -106,6 +106,15 @@ my $methods_arr = {
         ),
     ],
 };
+$methods_arr->{'9.65'} = $methods_arr->{'9.64'};
+$methods_arr->{'9.66'} = [
+    @{ $methods_arr->{'9.65'} },
+    qw(
+        reqMarketDataType
+    ),
+];
+$methods_arr->{'9.67'} = $methods_arr->{'9.66'};
+
 my $events_arr = {
     '9.64' => [
         qw(
@@ -164,30 +173,16 @@ my $events_arr = {
         )
     ],
 };
-
-# Example of adding just a couple of methods for a new version:
-# $methods_arr->{'9.65'} = [
-#    @{ $methods_arr->{'9.64'} },
-#    qw(
-#        freen
-#        gorf
-#    ),
-# };
-
-######################
-# 9.67 methods
-$methods_arr->{'9.67'} = [
-    @{ $methods_arr->{'9.64'} },
-    qw(
-        reqMarketDataType
-    ),
-];
-
-# 9.67 events
-$events_arr->{'9.67'} = [
-    grep { ! /deltaNeutralValidation/ } @{ $events_arr->{'9.64'} },
+$events_arr->{'9.65'} = $events_arr->{'9.64'};
+$events_arr->{'9.66'} = [
+    @{ $events_arr->{'9.65'} },
     qw(
         marketDataType
+    ),
+];
+$events_arr->{'9.67'} = [
+    @{ $events_arr->{'9.66'} },
+    qw(
         commissionReport
     ),
 ];

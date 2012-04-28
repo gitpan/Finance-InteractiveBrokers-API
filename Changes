@@ -9,6 +9,10 @@ API:    Change in user-facing API (hopefully rare).
 DOC:    Changes to documentation.
 ------------------------------------------------------------
 
+0.02_02  2012-04-28
+         NEW: Added support for IB API v9.65 and v9.66
+         FIX: Corrected support for IB API v9.67
+
 0.02_01  2012-04-27
          NEW: Added support for IB API v9.67
          NEW: More comprehensive testing

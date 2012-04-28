@@ -16,7 +16,7 @@ use warnings;
 
 use vars qw( $TRUE $FALSE $VERSION );
 BEGIN {
-    $VERSION = '0.02_01';
+    $VERSION = '0.02_02';
 }
 
 *TRUE      = \1;
@@ -164,13 +164,14 @@ BEGIN {
             cancelFundamentalData
         ),
     ];
-
-    $API->{'9.67'} = [
-        @{ $API->{'9.64'} },
+    $API->{'9.65'} = $API->{'9.64'};
+    $API->{'9.66'} = [
+        @{ $API->{'9.65'} },
         qw(
             reqMarketDataType
         ),
     ];
+    $API->{'9.67'} = $API->{'9.66'};
 
     $EVENTS->{'9.64'} = [ qw(
             winError
@@ -186,6 +187,7 @@ BEGIN {
             tickSnapshotEnd
             orderStatus
             openOrder
+            openOrderEnd
             nextValidId
             updateAccountValue
             updatePortfolio
@@ -207,15 +209,19 @@ BEGIN {
             realtimeBar
             fundamentalData
             deltaNeutralValidation
-            openOrderEnd
             accountDownloadEnd
         ),
     ];
-
-    $EVENTS->{'9.67'} = [
-        grep { !/deltaNeutralValidation/ } @{ $EVENTS->{'9.64'} },
+    $EVENTS->{'9.65'} = $EVENTS->{'9.64'};
+    $EVENTS->{'9.66'} = [
+        @{ $EVENTS->{'9.65'} },
         qw(
             marketDataType
+        ),
+    ];
+    $EVENTS->{'9.67'} = [
+        @{ $EVENTS->{'9.66'} },
+        qw(
             commissionReport
         ),
     ];
