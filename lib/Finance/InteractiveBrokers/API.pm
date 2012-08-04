@@ -2,7 +2,7 @@ package Finance::InteractiveBrokers::API;
 #
 #   Finance::InteractiveBrokers::API - Convenience functions for IB API
 #
-#   Copyright (c) 2010-2011 Jason McManus
+#   Copyright (c) 2010-2012 Jason McManus
 #
 #   Full POD documentation after __END__
 #
@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.02_03';
+    $VERSION   = '0.03';
 }
 
 *TRUE     = \1;
@@ -580,7 +580,7 @@ L<http://search.cpan.org/dist/Finance-InteractiveBrokers-API/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2010-2011 Jason McManus
+Copyright (c) 2010-2012 Jason McManus
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

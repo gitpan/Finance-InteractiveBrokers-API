@@ -9,6 +9,9 @@ API:    Change in user-facing API (hopefully rare).
 DOC:    Changes to documentation.
 ------------------------------------------------------------
 
+0.03     2012-08-04
+         Bumping to production release
+
 0.02_03  2012-04-29
          NEW: Added undocumented reqGlobalCancel to IB API v9.66
 

@@ -2,7 +2,7 @@
 #
 #   Finance::InteractiveBrokers::API - Tests for main module
 #
-#   Copyright (c) 2010-2011 Jason McManus
+#   Copyright (c) 2010-2012 Jason McManus
 #
 
 use Data::Dumper;
@@ -16,7 +16,7 @@ use warnings;
 
 use vars qw( $TRUE $FALSE $VERSION );
 BEGIN {
-    $VERSION = '0.02_03';
+    $VERSION = '0.03';
 }
 
 *TRUE      = \1;
