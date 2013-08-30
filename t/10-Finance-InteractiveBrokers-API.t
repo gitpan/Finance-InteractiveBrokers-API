@@ -2,7 +2,7 @@
 #
 #   Finance::InteractiveBrokers::API - Tests for main module
 #
-#   Copyright (c) 2010-2012 Jason McManus
+#   Copyright (c) 2010-2013 Jason McManus
 #
 
 use Data::Dumper;
@@ -16,7 +16,7 @@ use warnings;
 
 use vars qw( $TRUE $FALSE $VERSION );
 BEGIN {
-    $VERSION = '0.03';
+    $VERSION = '0.04';
 }
 
 *TRUE      = \1;
@@ -122,6 +122,7 @@ BEGIN {
     $API->{'9.64'} = [
         qw(
             processMessages
+            setSelectTimeout
             eConnect
             eDisconnect
             isConnected

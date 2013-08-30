@@ -2,7 +2,7 @@ package Finance::InteractiveBrokers::API;
 #
 #   Finance::InteractiveBrokers::API - Convenience functions for IB API
 #
-#   Copyright (c) 2010-2012 Jason McManus
+#   Copyright (c) 2010-2013 Jason McManus
 #
 #   Full POD documentation after __END__
 #
@@ -21,7 +21,7 @@ BEGIN
     require Exporter;
     @ISA       = qw( Exporter );
     @EXPORT_OK = qw( api_version );
-    $VERSION   = '0.03';
+    $VERSION   = '0.04';
 }
 
 *TRUE     = \1;
@@ -43,6 +43,7 @@ my $methods_arr = {
         # Our add-ons
         qw(
             processMessages
+            setSelectTimeout
         ),
         # Official API
         # XXX: API Docs and source code differ (I use the source code names):
@@ -580,7 +581,7 @@ L<http://search.cpan.org/dist/Finance-InteractiveBrokers-API/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2010-2012 Jason McManus
+Copyright (c) 2010-2013 Jason McManus
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
